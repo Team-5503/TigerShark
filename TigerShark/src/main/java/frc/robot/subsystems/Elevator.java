@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.ElevatorFeedforward;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -13,11 +14,11 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 
-public class elevator extends SubsystemBase {
+public class Elevator extends SubsystemBase {
 
   SparkMax m_elevator;
   /** Creates a new elevator. */
-  public elevator() {
+  public Elevator() {
     m_elevator = new SparkMax(0, MotorType.kBrushless);
     
     SparkMaxConfig elevatorConfig = new SparkMaxConfig();

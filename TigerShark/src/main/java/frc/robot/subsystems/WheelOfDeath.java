@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.spark.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.ArmFeedforward;
 
 public class WheelOfDeath extends SubsystemBase {
   /** Creates a new WheelOfDeath. */

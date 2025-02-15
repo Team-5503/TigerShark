@@ -118,6 +118,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private SysIdRoutine m_sysIdRoutineToApply = m_sysIdRoutineTranslation;
 
     /**
+     * configures pathplanner for autonomus pathing
+     * TODO: tune PID and get working methods 
+     */
+    private void configurePathPlanner(){
+        
+    }
+    /**
      * Constructs a CTRE SwerveDrivetrain using the specified constants.
      * <p>
      * This constructs the underlying hardware devices, so users should not construct

@@ -11,6 +11,9 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
 
 import com.pathplanner.lib.config.RobotConfig;
 
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
@@ -202,13 +205,8 @@ public class TunerConstants {
         );
 
         
-    /**
-     * Path planner
-     * extremely experimental
-     */
 
-     
-        //RobotConfig config = RobotConfig.fromGUISettings();
+    
       
   
     /**
@@ -220,7 +218,29 @@ public class TunerConstants {
             DrivetrainConstants, FrontLeft, FrontRight, BackLeft, BackRight
         );
     }
+    /*
+     * Spark max configs
+     */
+    public static class sparkConfig{
+        SparkMaxConfig elevatorL1 = new SparkMaxConfig();
+        elevatorL1.smartCurrentLimit(40);
+        SparkMaxConfig elevatorL2 = new SparkMaxConfig();
+        SparkMaxConfig wheel = new SparkMaxConfig();
+        SparkMaxConfig grab = new SparkMaxConfig();
+        
+        }
 
+    /*
+     * elevator
+     */
+
+    /**
+     * Path planner
+     * extremely experimental
+     */
+
+     
+        //RobotConfig config = RobotConfig.fromGUISettings();
 
     /**
      * Swerve Drive class utilizing CTR Electronics' Phoenix 6 API with the selected device types.
