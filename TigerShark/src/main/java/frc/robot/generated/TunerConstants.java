@@ -218,17 +218,7 @@ public class TunerConstants {
             DrivetrainConstants, FrontLeft, FrontRight, BackLeft, BackRight
         );
     }
-    /*
-     * Spark max configs
-     */
-    public static class sparkConfig{
-        SparkMaxConfig elevatorL1 = new SparkMaxConfig();
-        elevatorL1.smartCurrentLimit(40);
-        SparkMaxConfig elevatorL2 = new SparkMaxConfig();
-        SparkMaxConfig wheel = new SparkMaxConfig();
-        SparkMaxConfig grab = new SparkMaxConfig();
-        
-        }
+    
 
     /*
      * elevator
