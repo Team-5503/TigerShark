@@ -15,11 +15,12 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkBase.ControlType;
 
 public class Elevator extends SubsystemBase {
 
   SparkMax m_elevatorL1, m_elevatorL2;
-  private SparkClosedLoopController closedLoopControllerL1, ClosedLoopControllerL2;
+  private SparkClosedLoopController closedLoopControllerL1, closedLoopControllerL2;
   private RelativeEncoder encoderL1, encoderL2;
   /** Creates a new elevator. */
   public Elevator() {
@@ -28,7 +29,7 @@ public class Elevator extends SubsystemBase {
     encoderL1 = m_elevatorL1.getEncoder();
 
     m_elevatorL2 = new SparkMax(14, MotorType.kBrushless);
-    closedLoopControllerL1 = m_elevatorL1.getClosedLoopController();
+    closedLoopControllerL2 = m_elevatorL2.getClosedLoopController();
     encoderL1 = m_elevatorL1.getEncoder();
 
     SparkMaxConfig elevatorConfigL1 = new SparkMaxConfig();
@@ -43,7 +44,7 @@ public class Elevator extends SubsystemBase {
       .p(.3)
       .i(0)
       .d(.05)
-      .outputRange(0, 0);
+      .outputRange(.5, .5);
     elevatorConfigL1.softLimit
       .forwardSoftLimitEnabled(true)
       .forwardSoftLimit(50)//TODO: get measurements in rev hardware client
@@ -58,7 +59,7 @@ public class Elevator extends SubsystemBase {
       .p(.3)
       .i(0)
       .d(.05)
-      .outputRange(0, 0);
+      .outputRange(.5, .5);
     elevatorConfigL2.softLimit
       .forwardSoftLimitEnabled(true)
       .forwardSoftLimit(35)//TODO: get measurements in rev hardware client
@@ -72,5 +73,31 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public double getL1Pos(){
+    return encoderL1.getPosition();
+  }
+
+  public double getL2Pos(){
+    return encoderL2.getPosition();
+  }
+
+  public void setPos(double L1, double L2){
+    closedLoopControllerL1.setReference(L1, ControlType.kPosition);
+    closedLoopControllerL2.setReference(L2, ControlType.kPosition);
+  }
+
+  public void resetL1(){
+    encoderL1.setPosition(0);
+  }
+
+  public void resetL2(){
+    encoderL2.setPosition(0);
+  }
+
+  public void resetElevator(){
+    resetL1();
+    resetL2();
   }
 }

@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.WheelOfDeath;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -24,7 +26,7 @@ public class RobotContainer {
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.07).withRotationalDeadband(MaxAngularRate * 0.07) // Add a 10% deadband
+            .withDeadband(MaxSpeed * 0.07).withRotationalDeadband(MaxAngularRate * 0.07) // Add a 7% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
@@ -32,8 +34,11 @@ public class RobotContainer {
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
     private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController operator = new CommandXboxController(0);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final Elevator elevator = new Elevator();
+    public final WheelOfDeath wheelOfDeath = new WheelOfDeath();
 
     public RobotContainer() {
         configureBindings();
@@ -65,6 +70,8 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+        
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }

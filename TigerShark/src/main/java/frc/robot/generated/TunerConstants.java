@@ -11,8 +11,6 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
 
 import com.pathplanner.lib.config.RobotConfig;
 
-import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
@@ -219,10 +217,7 @@ public class TunerConstants {
         );
     }
     
-
-    /*
-     * elevator
-     */
+    
 
     /**
      * Path planner

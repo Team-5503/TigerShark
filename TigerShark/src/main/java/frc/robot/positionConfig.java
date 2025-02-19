@@ -23,4 +23,20 @@ public class positionConfig {
         targetVelocity = velocity;
 
     }
+
+    public double getL1Tar(){
+        return targetHeightL1;
+    }
+
+    public double getL2Tar(){
+        return targetHeightL2;
+    }
+
+    public double getAngleTar(){
+        return targetAngle;
+    }
+
+    public double getVelTar(){
+        return targetVelocity;
+    }
 }
