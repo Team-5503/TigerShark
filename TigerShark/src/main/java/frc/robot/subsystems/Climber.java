@@ -18,7 +18,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-
+/**TODO: HALT ALL WORK ON CLIMBER UNTIL FURTHER NOTICE!!!
+ * We may not be able to fit the climber on the bot due to the rule about touching the chain
+ * Will need to rething the climb and our own lives
+ **/
 public class Climber extends SubsystemBase {
    
   SparkMax m_pivotMotor;
