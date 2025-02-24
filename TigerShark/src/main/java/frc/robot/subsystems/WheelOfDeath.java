@@ -20,6 +20,7 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 
 public class WheelOfDeath extends SubsystemBase {
   /** Creates a new WheelOfDeath. */
+  SparkClosedLoopController mainWheelClosedLoop;
   SparkMax mainWheelMotor, coralMotor, algaeMotor;
   AbsoluteEncoder mainWheelEncoder;
   public WheelOfDeath() 
@@ -27,6 +28,7 @@ public class WheelOfDeath extends SubsystemBase {
     mainWheelMotor = new SparkMax(15, MotorType.kBrushless);
     coralMotor = new SparkMax(16, MotorType.kBrushless);
     algaeMotor = new SparkMax(17, MotorType.kBrushless);
+    mainWheelClosedLoop = mainWheelMotor.getClosedLoopController();
     mainWheelEncoder = mainWheelMotor.getAbsoluteEncoder();
     
   }

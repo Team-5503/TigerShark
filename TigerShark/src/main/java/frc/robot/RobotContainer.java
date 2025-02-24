@@ -19,6 +19,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.WheelOfDeath;
+import frc.robot.positionConfig;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -39,6 +40,29 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     public final Elevator elevator = new Elevator();
     public final WheelOfDeath wheelOfDeath = new WheelOfDeath();
+
+    public final positionConfig[] positions = 
+    {
+        new positionConfig(0, 0, 0, 0), // algae side straight up
+        // intake
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // algae ground intake
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral bay intake
+        // low
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // algae processor shoot
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral L1 shoot
+        // L2
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // algae above L2 intake
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral L2 shoot
+        // L3
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // algae above L3 intake
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral L3 shoot 
+        // high
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // algae barge shoot
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral L4 shoot
+        // other
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // starting position
+        new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // test for feedforward (both sides out)
+    };
 
     public RobotContainer() {
         configureBindings();
