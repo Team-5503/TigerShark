@@ -20,7 +20,6 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 
 public class WheelOfDeath extends SubsystemBase {
   /** Creates a new WheelOfDeath. */
-  SparkClosedLoopController mainWheelClosedLoop;
   SparkMax mainWheelMotor, coralMotor, algaeMotor;
   AbsoluteEncoder mainWheelEncoder;
   public WheelOfDeath() 
@@ -28,9 +27,51 @@ public class WheelOfDeath extends SubsystemBase {
     mainWheelMotor = new SparkMax(15, MotorType.kBrushless);
     coralMotor = new SparkMax(16, MotorType.kBrushless);
     algaeMotor = new SparkMax(17, MotorType.kBrushless);
-    mainWheelClosedLoop = mainWheelMotor.getClosedLoopController();
     mainWheelEncoder = mainWheelMotor.getAbsoluteEncoder();
     
+
+    SparkMaxConfig  mainWheelMotorConfig = new SparkMaxConfig();
+    SparkMaxConfig coralMotorConfig = new SparkMaxConfig();
+    SparkMaxConfig algaeMotorConfig = new SparkMaxConfig();
+    
+    
+    /// You change these value because I won't remember-JAM
+    mainWheelMotorConfig
+      .smartCurrentLimit(50)
+      .idleMode(IdleMode.kBrake);
+    //TODO: TUNE IT
+    mainWheelMotorConfig.closedLoop
+      .p(.3)
+      .i(0)
+      .d(.05)
+      .outputRange(.2,.2);
+    mainWheelMotorConfig.softLimit
+      .forwardSoftLimitEnabled(true)
+      .forwardSoftLimit(50) //TODO: YOU FIGURE THIS ONE OUT
+      .reverseSoftLimitEnabled(true)
+      .reverseSoftLimit(-1);
+
+    // Something to do with the Neo 550 Current Change these Value
+    coralMotorConfig
+      .smartCurrentLimit(20)
+      .idleMode(IdleMode.kBrake);
+    coralMotorConfig.softLimit
+      .forwardSoftLimitEnabled(true)
+      .reverseSoftLimitEnabled(true)
+      .reverseSoftLimit(-1);
+
+    algaeMotorConfig
+      .smartCurrentLimit(20)
+      .idleMode(IdleMode.kBrake);
+    algaeMotorConfig.softLimit
+      .forwardSoftLimitEnabled(true)
+      .reverseSoftLimitEnabled(true)
+      .reverseSoftLimit(-1);
+
+
+    mainWheelMotor.configure(mainWheelMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    coralMotor.configure(coralMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    algaeMotor.configure(algaeMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
   }
 
   @Override
