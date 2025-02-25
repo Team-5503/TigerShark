@@ -64,6 +64,7 @@ public class RobotContainer {
         new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // test for feedforward (both sides out)
     };
 
+    public int positionSelected = 0;
     public RobotContainer() {
         configureBindings();
     }
@@ -98,6 +99,10 @@ public class RobotContainer {
         
 
         drivetrain.registerTelemetry(logger::telemeterize);
+    }
+
+    public void changePosition(int pos){
+        positionSelected = pos;
     }
 
     public Command getAutonomousCommand() {

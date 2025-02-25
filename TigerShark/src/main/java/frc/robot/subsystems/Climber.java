@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-/**TODO: HALT ALL WORK ON CLIMBER UNTIL FURTHER NOTICE!!!
- * We may not be able to fit the climber on the bot due to the rule about touching the chain
- * Will need to rething the climb and our own lives
+/**TODO: Work on the climber as a possible replacement
+ * 
+ * Mr Ferrell's hope in the bot getting finised is at an all time low, so get the climber in a working state to climb.
  **/
 public class Climber extends SubsystemBase {
    
