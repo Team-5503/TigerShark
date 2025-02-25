@@ -43,7 +43,7 @@ public class RobotContainer {
 
     public final positionConfig[] positions = 
     {
-        new positionConfig(0, 0, 0, 0), // algae side straight up
+        new positionConfig(0, 0, 0, 0), // arm stow
         // intake
         new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // algae ground intake
         new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, MaxAngularRate), // coral bay intake
@@ -109,6 +109,10 @@ public class RobotContainer {
         
 
         drivetrain.registerTelemetry(logger::telemeterize);
+    }
+
+    public void changePosition(int pos){
+        positionSelected = pos;
     }
 
     public Command getAutonomousCommand() {
