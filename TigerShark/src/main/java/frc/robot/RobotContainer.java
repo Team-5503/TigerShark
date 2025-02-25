@@ -64,6 +64,17 @@ public class RobotContainer {
         new positionConfig(MaxAngularRate, MaxSpeed, MaxAngularRate, 0), // test for feedforward (both sides out)
     };
 
+    //Function that changes velocty depending if it is odd or even
+
+    //set grab , setposition set the arm
+    //CALL FROM CONTAINER
+    public int currentPosition = 1;
+
+    public void changeVel(){
+        positions[currentPosition].getVelTar();
+
+    }
+
     public RobotContainer() {
         configureBindings();
     }
