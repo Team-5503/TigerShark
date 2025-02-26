@@ -69,7 +69,7 @@ public class RobotContainer {
 
     //set grab , setposition set the arm
     //CALL FROM CONTAINER
-    public int currentPosition = 1;
+    public int currentPosition = 0;
 
     public void changeVel(){
         positions[currentPosition].getVelTar();
