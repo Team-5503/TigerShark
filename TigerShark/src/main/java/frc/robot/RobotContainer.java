@@ -25,6 +25,7 @@ public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
     private double positionSelected;
+    public int currentPosition = 0;
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -69,14 +70,14 @@ public class RobotContainer {
 
     //set grab , setposition set the arm
     //CALL FROM CONTAINER
-    public int currentPosition = 0;
 
     public void changeVel(){
         positions[currentPosition].getVelTar();
 
     }
 
-    //end
+    //END
+
     public RobotContainer() {
         configureBindings();
     }
@@ -113,9 +114,13 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
-    //Change This
+    //Change THis
     public void changePosition(int pos){
         positionSelected = pos;
+    }
+
+    public int getCurrentPos(){
+        return currentPosition;
     }
 
     public Command getAutonomousCommand() {

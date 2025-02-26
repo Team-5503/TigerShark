@@ -24,6 +24,7 @@ public class WheelOfDeath extends SubsystemBase {
   SparkMax mainWheelMotor, coralMotor, algaeMotor;
   SparkClosedLoopController closedLoopControllerMain;
   AbsoluteEncoder mainWheelEncoder;
+  //public int pos = 
   public WheelOfDeath() 
   {
     mainWheelMotor = new SparkMax(15, MotorType.kBrushless);
@@ -87,16 +88,15 @@ public class WheelOfDeath extends SubsystemBase {
   public double getWheelPositionRaw(){
     return mainWheelEncoder.getPosition();
   }
-  //setReference not setposition. HERE
-  public void setMainPos(double Val){
-    closedLoopControllerMain.setReference(Val, ControlType.kPosition);
-  }
-
-
   public double getWheelPositionAngle(){
    
     return mainWheelEncoder.getPosition()*360;
   }
-  
-
+  //setReference. HERE
+  public void setMainPos(double Val){
+    closedLoopControllerMain.setReference(Val, ControlType.kPosition);
+  }
+  //What do I add to this part of the section of the code.
+  //int in ele arm pos robot container change change in ele and arm
+  //To keep the same in RobotContainer.
 }

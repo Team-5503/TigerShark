@@ -22,6 +22,7 @@ public class Elevator extends SubsystemBase {
   SparkMax m_elevatorL1, m_elevatorL2;
   private SparkClosedLoopController closedLoopControllerL1, closedLoopControllerL2;
   private RelativeEncoder encoderL1, encoderL2;
+  
   /** Creates a new elevator. */
   public Elevator() {
     m_elevatorL1 = new SparkMax(13, MotorType.kBrushless);
