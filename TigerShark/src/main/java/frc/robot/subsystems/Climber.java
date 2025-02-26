@@ -18,16 +18,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-/**TODO: Work on the climber as a possible replacement
- * 
- * Mr Ferrell's hope in the bot getting finised is at an all time low, so get the climber in a working state to climb.
- **/
+
 public class Climber extends SubsystemBase {
    
   SparkMax m_pivotMotor;
   private SparkClosedLoopController closedLoopControllerCl;
   private RelativeEncoder climb;
-  private double position;
+  
   /** Creates a new Climber. */
   public Climber() {
     m_pivotMotor = new SparkMax(14, MotorType.kBrushless); //Change the device id to correct one
@@ -55,20 +52,20 @@ public class Climber extends SubsystemBase {
     m_pivotMotor.configure(climbConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
   }
   
-/* Review later 
+
   public double getPosition(){
-    return position;
+    return climb.getPosition();
   }
 
-  public void setPosition(){
-    m_pivotMotor.setPosition(setvalue); 
+  public void setPosition(double x){
+    m_pivotMotor.set(x);
   }
 
-*/
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
+    
   }
   
 
