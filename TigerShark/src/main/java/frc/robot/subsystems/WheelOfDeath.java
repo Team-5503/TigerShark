@@ -21,16 +21,19 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 public class WheelOfDeath extends SubsystemBase {
   /** Creates a new WheelOfDeath. */
   SparkMax mainWheelMotor, coralMotor, algaeMotor;
+  SparkClosedLoopController closedLoopControllerMain;
   AbsoluteEncoder mainWheelEncoder;
   public WheelOfDeath() 
   {
     mainWheelMotor = new SparkMax(15, MotorType.kBrushless);
+    closedLoopControllerMain = mainWheelMotor.getClosedLoopController();  
     coralMotor = new SparkMax(16, MotorType.kBrushless);
     algaeMotor = new SparkMax(17, MotorType.kBrushless);
     mainWheelEncoder = mainWheelMotor.getAbsoluteEncoder();
-    
+   
 
     SparkMaxConfig  mainWheelMotorConfig = new SparkMaxConfig();
+
     SparkMaxConfig coralMotorConfig = new SparkMaxConfig();
     SparkMaxConfig algaeMotorConfig = new SparkMaxConfig();
     
@@ -83,10 +86,16 @@ public class WheelOfDeath extends SubsystemBase {
   public double getWheelPositionRaw(){
     return mainWheelEncoder.getPosition();
   }
+  //setReference not setposition. HERE
+  public void setMainPos(){
+    closedLoopControllerMain.setReference(getWheelPositionAngle(), null)
+  }
+
 
   public double getWheelPositionAngle(){
    
     return mainWheelEncoder.getPosition()*360;
   }
   
+
 }
