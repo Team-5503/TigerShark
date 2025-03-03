@@ -8,6 +8,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -23,44 +24,51 @@ public class Climber extends SubsystemBase {
    
   SparkMax m_pivotMotor;
   private SparkClosedLoopController closedLoopControllerCl;
-  private RelativeEncoder climb;
+  private RelativeEncoder climbEncoder;
   
   /** Creates a new Climber. */
   public Climber() {
-    m_pivotMotor = new SparkMax(14, MotorType.kBrushless); //Change the device id to correct one
+    m_pivotMotor = new SparkMax(41, MotorType.kBrushless); //Change the device id to correct one
     closedLoopControllerCl = m_pivotMotor.getClosedLoopController();
-    climb = m_pivotMotor.getEncoder();
+    climbEncoder = m_pivotMotor.getEncoder();
     //position = climb.getPosition();
 
     SparkMaxConfig climbConfig = new SparkMaxConfig();
 
     climbConfig
-      .smartCurrentLimit(50)
+      .smartCurrentLimit(80)
       .idleMode(IdleMode.kBrake);
     climbConfig.closedLoop
       //Change values later
-      .p(.3)
+      .p(.15)
       .i(0)
       .d(.05)
-      .outputRange(0, 0);
+      .outputRange(-.7,.7 );
     climbConfig.softLimit
       .forwardSoftLimitEnabled(true)
-      .forwardSoftLimit(40)
+      .forwardSoftLimit(1)
       .reverseSoftLimitEnabled(true)
-      .reverseSoftLimit(-1);
+      .reverseSoftLimit(-41);
 
     m_pivotMotor.configure(climbConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
   }
   
 
   public double getPosition(){
-    return climb.getPosition();
+    return climbEncoder.getPosition();
   }
 
-  public void setPosition(double x){
-    m_pivotMotor.set(x);
+  public void setReach(){
+    closedLoopControllerCl.setReference(-27, ControlType.kPosition);
   }
 
+  public void setStow(){
+    closedLoopControllerCl.setReference(-2, ControlType.kPosition);
+  }
+
+  public void stop(){
+    m_pivotMotor.stopMotor();
+  }
 
   @Override
   public void periodic() {

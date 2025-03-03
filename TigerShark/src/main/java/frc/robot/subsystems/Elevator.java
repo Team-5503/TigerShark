@@ -22,6 +22,7 @@ public class Elevator extends SubsystemBase {
   SparkMax m_elevatorL1, m_elevatorL2;
   private SparkClosedLoopController closedLoopControllerL1, closedLoopControllerL2;
   private RelativeEncoder encoderL1, encoderL2;
+  public int position = 0;
   
   /** Creates a new elevator. */
   public Elevator() {
@@ -84,9 +85,10 @@ public class Elevator extends SubsystemBase {
     return encoderL2.getPosition();
   }
 
-  public void setPos(double L1, double L2){
+  public void setPos(int pos,double L1, double L2){
     closedLoopControllerL1.setReference(L1, ControlType.kPosition);
     closedLoopControllerL2.setReference(L2, ControlType.kPosition);
+    position = pos;
   }
 
   public void resetL1(){
@@ -100,5 +102,9 @@ public class Elevator extends SubsystemBase {
   public void resetElevator(){
     resetL1();
     resetL2();
+  }
+
+  public int getPos(){
+    return position;
   }
 }
